@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('Api')->middleware('api.token')->prefix('sensor')->group(function () {
-    Route::get('/settings', 'SensorsController@getSettings');
+Route::middleware('api.token')->prefix('sensor')->group(function () {
+    Route::post('/store', 'SensorsController@store')->name('sensor.store');
+    Route::get('/get/{id}', 'SensorsController@get')->name('sensor.get');
 });
