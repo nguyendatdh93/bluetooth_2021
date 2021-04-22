@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSensorRequest;
+use App\Models\Sensor;
 use Illuminate\Http\Request;
 
 class SensorsController extends Controller
 {
-    public function getSettings(Request $request)
+    public function store(StoreSensorRequest $request)
     {
-        $request->validate([
-            'sensor_id' => 'required|numeric',
+        Sensor::updateOrCreate([
+           
+        ], [
+
         ]);
     }
 }
