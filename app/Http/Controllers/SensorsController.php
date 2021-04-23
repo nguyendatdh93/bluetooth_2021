@@ -11,7 +11,7 @@ class SensorsController extends Controller
 {
     public function store(StoreSensorRequest $request)
     {
-        Sensor::updateOrCreate([
+        return Sensor::updateOrCreate([
             'id' => $request->get('id') ?? 0,
         ], [
             'name' => $request->get('name'),

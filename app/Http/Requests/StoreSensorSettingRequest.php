@@ -6,10 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
-class StoreSensorRequest extends FormRequest
+class StoreSensorSettingRequest extends FormRequest
 {
-    protected $stopOnFirstFailure = true;
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,8 +26,7 @@ class StoreSensorRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:20',
-            'datetime' => 'required',
+            //
         ];
     }
 
