@@ -21,11 +21,11 @@ class SensorsController extends Controller
 
     public function get($id)
     {
-        return new SensorResource(Sensor::findOrFail($id));
+        return new SensorResource(Sensor::find($id));
     }
 
     public function getSettings()
     {
-        
+
     }
 }

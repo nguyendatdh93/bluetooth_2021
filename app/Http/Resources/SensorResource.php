@@ -14,6 +14,10 @@ class SensorResource extends JsonResource
      */
     public function toArray($request)
     {
+        if (empty($this->id)) {
+            return [];
+        }
+
         return [
             'id' => $this->id,
             'name' => $this->name,
