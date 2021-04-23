@@ -23,9 +23,4 @@ class SensorsController extends Controller
     {
         return new SensorResource(Sensor::find($id));
     }
-
-    public function getSettings()
-    {
-
-    }
 }
