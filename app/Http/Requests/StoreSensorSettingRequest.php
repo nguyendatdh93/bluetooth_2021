@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\CheckSettingRelationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
@@ -32,7 +31,6 @@ class StoreSensorSettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'sensor_id' => [new CheckSettingRelationRule($this->route('sensorId') ?? 0, $this->route('settingId') ?? 0)],
             'setname' => 'required|string|max:8',
             'bacs' => 'required|numeric|min:1|max:5',
             'crng' => 'required|numeric|min:0|max:2',
