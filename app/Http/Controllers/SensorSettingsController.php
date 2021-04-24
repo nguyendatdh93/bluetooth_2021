@@ -9,9 +9,11 @@ use Illuminate\Http\Request;
 
 class SensorSettingsController extends Controller
 {
-    public function store(StoreSensorSettingRequest $request)
+    public function store(StoreSensorSettingRequest $request, $sensorId, $settingId = 0)
     {
-
+        $setting = $request->all();
+        $setting['sensor_id'] = $sensorId;
+        return SensorSetting::updateOrCreate(['id' => $settingId], $setting);
     }
 
     public function gets($sensorId, $settingId = 0)
