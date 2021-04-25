@@ -16,7 +16,8 @@ class SensorFakeSeeder extends Seeder
     public function run()
     {
         for ($i = 0; $i < 20; $i++) {
-            Sensor::create( [
+            Sensor::create([
+                'mac_device' => 'mac_device_' . $i,
                 'name' => 'sensor ' . ($i + 1),
                 'datetime' => Carbon::now()->subMinutes(rand(1, 10)),
             ]);
