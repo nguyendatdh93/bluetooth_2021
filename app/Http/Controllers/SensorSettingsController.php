@@ -4,16 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSensorSettingRequest;
 use App\Http\Resources\SensorSettingResource;
+use App\Models\BacSetting;
 use App\Models\SensorSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SensorSettingsController extends Controller
 {
     public function store(StoreSensorSettingRequest $request, $sensorId, $settingId = 0)
     {
-        $setting = $request->all();
-        $setting['sensor_id'] = $sensorId;
-        return SensorSetting::updateOrCreate(['id' => $settingId], $setting);
+        $settingData = $request->all();
+        $settingData['sensor_id'] = $sensorId;
+        try {
+            DB::beginTransaction();
+            $setting = SensorSetting::updateOrCreate(['id' => $settingId], $settingData);
+            BacSetting::where('sensor_setting_id', $setting->id)->delete();
+            foreach ($settingData['bac'] as $bac) {
+                $bac['sensor_setting_id'] = $setting->id;
+                $bacSetting[] = BacSetting::create($bac);
+            }
+
+            DB::commit();
+            $setting->bac = $bacSetting;
+            return $setting;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['status' => false, 'message' => $e->getMessage()]);
+        }
     }
 
     public function gets($sensorId, $settingId = 0)
