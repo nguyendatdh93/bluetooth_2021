@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('api.token')->prefix('sensor')->group(function () {
     Route::post('/store', [\App\Http\Controllers\SensorsController::class, 'store'])->name('sensor.store');
-    Route::get('/{id}', [\App\Http\Controllers\SensorsController::class, 'get'])
+    Route::get('/{id?}', [\App\Http\Controllers\SensorsController::class, 'gets'])
         ->where('id', '[0-9]+')
-        ->name('sensor.get');
+        ->name('sensor.gets');
     Route::post('/{sensorId}/setting/{settingId?}', [\App\Http\Controllers\SensorSettingsController::class, 'store'])
         ->where('sensorId', '[0-9]+')
         ->name('sensor.setting.store');

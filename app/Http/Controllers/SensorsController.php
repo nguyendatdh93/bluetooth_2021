@@ -20,8 +20,14 @@ class SensorsController extends Controller
         ]);
     }
 
-    public function get($id)
+    public function gets($id = 0)
     {
-        return new SensorResource(Sensor::find($id));
+        if ($id) {
+            $sensors = Sensor::where('id', $id)->get();
+        } else {
+            $sensors = Sensor::all();
+        }
+
+        return SensorResource::collection($sensors);
     }
 }
