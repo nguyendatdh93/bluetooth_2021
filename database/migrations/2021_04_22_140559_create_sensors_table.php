@@ -15,6 +15,7 @@ class CreateSensorsTable extends Migration
     {
         Schema::create('sensors', function (Blueprint $table) {
             $table->id();
+            $table->string('mac_device', 50)->unique();
             $table->string('name');
             $table->dateTime('datetime');
             $table->timestamps();
