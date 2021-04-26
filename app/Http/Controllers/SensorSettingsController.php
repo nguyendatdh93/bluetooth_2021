@@ -21,12 +21,12 @@ class SensorSettingsController extends Controller
             BacSetting::where('sensor_setting_id', $setting->id)->delete();
             foreach ($settingData['bac'] as $bac) {
                 $bac['sensor_setting_id'] = $setting->id;
-                $bacSetting[] = BacSetting::create($bac);
+                BacSetting::create($bac);
             }
 
             DB::commit();
-            $setting->bac = $bacSetting;
-            return $setting;
+            $setting = SensorSetting::with(['bacSettings'])->where('id', $sensorId)->get();
+            return SensorSettingResource::collection(collect($setting));
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['status' => false, 'message' => $e->getMessage()]);
@@ -35,7 +35,7 @@ class SensorSettingsController extends Controller
 
     public function gets($sensorId, $settingId = 0)
     {
-        $settings = SensorSetting::where('sensor_id', $sensorId);
+        $settings = SensorSetting::with(['bacSettings'])->where('sensor_id', $sensorId);
         if ($settingId > 0) {
             $settings->where('id', $settingId);
         }
