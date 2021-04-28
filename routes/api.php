@@ -29,4 +29,7 @@ Route::middleware('api.token')->prefix('sensor')->group(function () {
     Route::delete('/setting/{settingId?}', [\App\Http\Controllers\SensorSettingsController::class, 'delete'])
         ->where('settingId', '[0-9]+')
         ->name('sensor.settings.delete');
+    Route::get('/measure/{sensorId}', [\App\Http\Controllers\SensorMeasuresController::class, 'paginate'])
+        ->where('sensorId', '[0-9]+')
+        ->name('sensor.measure.get');
 });
