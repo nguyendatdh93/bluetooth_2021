@@ -11,4 +11,24 @@ class SensorMeasure extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function measureMeasba()
+    {
+        return $this->hasOne(MeasureMeasba::class);
+    }
+
+    public function measureMeasdet()
+    {
+        return $this->hasOne(MeasureMeasdet::class);
+    }
+
+    public function measureMeaspara()
+    {
+        return $this->hasOne(MeasureMeasdet::class);
+    }
+
+    public function measureMeasres()
+    {
+        return $this->hasOne(MeasureMeasres::class);
+    }
 }
