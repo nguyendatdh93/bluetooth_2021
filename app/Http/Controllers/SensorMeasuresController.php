@@ -10,24 +10,17 @@ use Illuminate\Support\Facades\DB;
 
 class SensorMeasuresController extends Controller
 {
-    public function store(StoreSensorMeasureRequest $request, $sensorId, $sensorSettingId)
+    public function store(StoreSensorMeasureRequest $request, $id = 0)
     {
         try {
-            DB::commit();
-            $sensorMeasure = SensorMeasure::updateOrCreate([
-                'id' => $request->get('id'),
-            ],[
-                'sensor_id' => $sensorId,
-                'sensor_setting_id' => $sensorSettingId,
-                'datetime' => $request->get('datetime'),
-                'measure_id' => $request->get('measure_id'),
-            ]);
+            DB::beginTransaction();
+            $sensorMeasure = $this->storeSensorMeasure($request, $id);
 
             if ($measba = $request->get('measba')) {
                 $sensorMeasure->measureMeasba()->delete();
                 $sensorMeasure->measureMeasba()->create([
-                   'datetime' => $measba['datetime'],
-                   'pastaerr' => $measba['pastaerr'],
+                    'datetime' => $measba['datetime'],
+                    'pastaerr' => $measba['pastaerr'],
                 ]);
             }
 
@@ -44,7 +37,7 @@ class SensorMeasuresController extends Controller
             if ($measdet = $request->get('measdet')) {
                 $sensorMeasure->measureMeasdet()->delete();
                 $sensorMeasure->measureMeasdet()->create([
-                    'rawdmp' => $measdet['rawdmp'],
+                    'rawdmp' => json_encode($measdet['rawdmp']),
                 ]);
             }
 
@@ -60,10 +53,15 @@ class SensorMeasuresController extends Controller
             }
 
             DB::commit();
-        }catch (\Exception $exception) {
-            DB::rollBack();
-        }
 
+            $sensorMeasure = SensorMeasure::with(['measureMeasba', 'measureMeasdet', 'measureMeaspara', 'measureMeasres'])
+                ->where('id', $sensorMeasure->id)
+                ->first();
+            return new SensorMeasureResource($sensorMeasure);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response()->json(['status' => false, 'message' => $exception->getMessage()]);
+        }
     }
 
     public function paginate($sensorId)
@@ -73,5 +71,21 @@ class SensorMeasuresController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(10);
         return SensorMeasureResource::collection($sensorMeasures);
+    }
+
+    private function storeSensorMeasure($request, $id)
+    {
+        $sensorMeasureData = [
+            'datetime' => $request->get('datetime'),
+            'measure_id' => $request->get('measure_id'),
+        ];
+        if ($request->get('sensor_id') && $request->get('sensor_setting_id')) {
+            $sensorMeasureData['sensor_id'] = $request->get('sensor_id');
+            $sensorMeasureData['sensor_setting_id'] = $request->get('sensor_setting_id');
+        }
+
+        return SensorMeasure::updateOrCreate([
+            'id' => $id,
+        ], $sensorMeasureData);
     }
 }

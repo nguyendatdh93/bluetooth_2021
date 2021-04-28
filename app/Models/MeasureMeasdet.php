@@ -11,4 +11,8 @@ class MeasureMeasdet extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'rawdmp' => 'array'
+    ];
 }

@@ -31,9 +31,8 @@ Route::middleware('api.token')->prefix('sensor')->group(function () {
         ->where('settingId', '[0-9]+')
         ->name('sensor.settings.delete');
 
-    Route::post('/measure/{sensorId}/setting/{settingId}', [\App\Http\Controllers\SensorMeasuresController::class, 'store'])
-        ->where('sensorId', '[0-9]+')
-        ->where('settingId', '[0-9]+')
+    Route::post('/measure/{id?}', [\App\Http\Controllers\SensorMeasuresController::class, 'store'])
+        ->where('id', '[0-9]+')
         ->name('sensor.measure.store');
     Route::get('/measure/{sensorId}', [\App\Http\Controllers\SensorMeasuresController::class, 'paginate'])
         ->where('sensorId', '[0-9]+')
