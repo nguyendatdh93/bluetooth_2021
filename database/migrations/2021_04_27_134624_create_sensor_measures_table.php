@@ -17,6 +17,8 @@ class CreateSensorMeasuresTable extends Migration
             $table->id();
             $table->unsignedBigInteger('sensor_id')->index();
             $table->unsignedBigInteger('sensor_setting_id')->index();
+            $table->dateTime('datetime');
+            $table->integer('measure_id')->comment('0 to 100');
             $table->timestamps();
         });
     }

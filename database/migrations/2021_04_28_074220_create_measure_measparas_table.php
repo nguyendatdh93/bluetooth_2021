@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSensorsTable extends Migration
+class CreateMeasureMeasparasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateSensorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sensors', function (Blueprint $table) {
+        Schema::create('measure_measparas', function (Blueprint $table) {
             $table->id();
-            $table->string('mac_device', 50)->unique();
-            $table->string('name');
-            $table->dateTime('datetime');
+            $table->unsignedBigInteger('sensor_measure_id')->index();
+            $table->string('setname');
+            $table->integer('bacs');
+            $table->integer('crng');
+            $table->integer('eqp1');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateSensorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sensors');
+        Schema::dropIfExists('measure_measparas');
     }
 }
