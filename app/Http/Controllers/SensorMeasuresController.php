@@ -15,45 +15,11 @@ class SensorMeasuresController extends Controller
         try {
             DB::beginTransaction();
             $sensorMeasure = $this->storeSensorMeasure($request, $id);
-
-            if ($measba = $request->get('measba')) {
-                $sensorMeasure->measureMeasba()->delete();
-                $sensorMeasure->measureMeasba()->create([
-                    'datetime' => $measba['datetime'],
-                    'pastaerr' => $measba['pastaerr'],
-                ]);
-            }
-
-            if ($measpara = $request->get('measpara')) {
-                $sensorMeasure->measureMeaspara()->delete();
-                $sensorMeasure->measureMeaspara()->create([
-                    'setname' => $measpara['setname'],
-                    'bacs' => $measpara['bacs'],
-                    'crng' => $measpara['crng'],
-                    'eqp1' => $measpara['eqp1'],
-                ]);
-            }
-
-            if ($measdet = $request->get('measdet')) {
-                $sensorMeasure->measureMeasdet()->delete();
-                $sensorMeasure->measureMeasdet()->create([
-                    'rawdmp' => json_encode($measdet['rawdmp']),
-                ]);
-            }
-
-            if ($measres = $request->get('measres')) {
-                $sensorMeasure->measureMeasres()->delete();
-                $sensorMeasure->measureMeasres()->create([
-                    'name' => $measres['name'],
-                    'pkpot' => $measres['pkpot'],
-                    'dltc' => $measres['dltc'],
-                    'bgc' => $measres['bgc'],
-                    'err' => $measres['err'],
-                ]);
-            }
-
+            $this->storeMeasba($request, $sensorMeasure);
+            $this->storeMeaspara($request, $sensorMeasure);
+            $this->storeMeasdet($request, $sensorMeasure);
+            $this->storeMeasres($request, $sensorMeasure);
             DB::commit();
-
             $sensorMeasure = SensorMeasure::with(['measureMeasba', 'measureMeasdet', 'measureMeaspara', 'measureMeasres'])
                 ->where('id', $sensorMeasure->id)
                 ->first();
@@ -71,6 +37,54 @@ class SensorMeasuresController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(10);
         return SensorMeasureResource::collection($sensorMeasures);
+    }
+
+    private function storeMeasres($request, $sensorMeasure)
+    {
+        if ($measres = $request->get('measres')) {
+            $sensorMeasure->measureMeasres()->delete();
+            $sensorMeasure->measureMeasres()->create([
+                'name' => $measres['name'],
+                'pkpot' => $measres['pkpot'],
+                'dltc' => $measres['dltc'],
+                'bgc' => $measres['bgc'],
+                'err' => $measres['err'],
+            ]);
+        }
+    }
+
+    private function storeMeasdet($request, $sensorMeasure)
+    {
+        if ($measdet = $request->get('measdet')) {
+            $sensorMeasure->measureMeasdet()->delete();
+            $sensorMeasure->measureMeasdet()->create([
+                'rawdmp' => json_encode($measdet['rawdmp']),
+            ]);
+        }
+    }
+
+    private function storeMeaspara($request, $sensorMeasure)
+    {
+        if ($measpara = $request->get('measpara')) {
+            $sensorMeasure->measureMeaspara()->delete();
+            $sensorMeasure->measureMeaspara()->create([
+                'setname' => $measpara['setname'],
+                'bacs' => $measpara['bacs'],
+                'crng' => $measpara['crng'],
+                'eqp1' => $measpara['eqp1'],
+            ]);
+        }
+    }
+
+    private function storeMeasba($request, $sensorMeasure)
+    {
+        if ($measba = $request->get('measba')) {
+            $sensorMeasure->measureMeasba()->delete();
+            $sensorMeasure->measureMeasba()->create([
+                'datetime' => $measba['datetime'],
+                'pastaerr' => $measba['pastaerr'],
+            ]);
+        }
     }
 
     private function storeSensorMeasure($request, $id)
