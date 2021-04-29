@@ -34,7 +34,10 @@ Route::middleware('api.token')->prefix('sensor')->group(function () {
     Route::post('/measure/{id?}', [\App\Http\Controllers\SensorMeasuresController::class, 'store'])
         ->where('id', '[0-9]+')
         ->name('sensor.measure.store');
-    Route::get('/measure/{sensorId}', [\App\Http\Controllers\SensorMeasuresController::class, 'paginate'])
+    Route::get('{sensorId}/measure/', [\App\Http\Controllers\SensorMeasuresController::class, 'paginate'])
         ->where('sensorId', '[0-9]+')
+        ->name('sensor.measure.get');
+    Route::get('measure/{sensorMeasureId}', [\App\Http\Controllers\SensorMeasuresController::class, 'get'])
+        ->where('sensorMeasureId', '[0-9]+')
         ->name('sensor.measure.get');
 });

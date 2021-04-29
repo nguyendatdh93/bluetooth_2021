@@ -39,6 +39,14 @@ class SensorMeasuresController extends Controller
         return SensorMeasureResource::collection($sensorMeasures);
     }
 
+    public function get($sensorMeasureId)
+    {
+        $sensorMeasure = SensorMeasure::with(['measureMeasba', 'measureMeasdet', 'measureMeaspara', 'measureMeasres'])
+            ->where('id', $sensorMeasureId)
+            ->first();
+        return new SensorMeasureResource($sensorMeasure);
+    }
+
     private function storeMeasres($request, $sensorMeasure)
     {
         if ($measres = $request->get('measres')) {
