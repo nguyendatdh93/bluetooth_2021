@@ -35,7 +35,7 @@ class CheckSettingRelationRule implements Rule
             return SensorSetting::where('id', $this->settingId)->where('sensor_id', $this->sensorId)->count() > 0;
         }
 
-        return false;
+        return true;
     }
 
     /**
