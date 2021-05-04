@@ -18,7 +18,7 @@ class BacSettingFakeSeeder extends Seeder
     {
         $sensorSettings = SensorSetting::all();
         foreach ($sensorSettings as $setting) {
-            for ($i = 1; $i <= rand(1, 5); $i++) {
+            for ($i = 1; $i <= $setting->bacs; $i++) {
                 BacSetting::create([
                     'sensor_setting_id' => $setting->id,
                     'bacname' => 'bacname' . $setting->id . '_' . $i,
