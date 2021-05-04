@@ -34,7 +34,6 @@ class StoreSensorMeasureRequest extends FormRequest
 
         if (empty($this->route('id'))) {
             $rules['sensor_id'] = ['required', 'numeric', 'min:1', new CheckSettingRelationRule($this->get('sensor_id') ?? 0, $this->get('sensor_setting_id') ?? 0)];
-            $rules['sensor_setting_id'] = ['required', 'numeric', 'min:1'];
         }
 
         if (!empty($this->get('measba'))) {
@@ -43,10 +42,7 @@ class StoreSensorMeasureRequest extends FormRequest
         }
 
         if (!empty($this->get('measpara'))) {
-            $rules['measpara.setname'] = 'required|string|max:50';
-            $rules['measpara.bacs'] = 'required|numeric';
-            $rules['measpara.crng'] = 'required|numeric';
-            $rules['measpara.eqp1'] = 'required|numeric';
+            $rules['measpara'] = 'required|array';
         }
 
         if (!empty($this->get('measdet'))) {

@@ -26,7 +26,6 @@ class SensorMeasureFakeSeeder extends Seeder
                         DB::beginTransaction();
                         $sensorMeasure = SensorMeasure::create([
                             'sensor_id' => $sensor->id,
-                            'sensor_setting_id' => $sensor->settings->random()->id,
                             'datetime' => Carbon::now()->addMinutes(rand(0, 100)),
                             'measure_id' => rand(1, 100),
                         ]);

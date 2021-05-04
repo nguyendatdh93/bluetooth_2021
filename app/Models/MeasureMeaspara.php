@@ -11,4 +11,15 @@ class MeasureMeaspara extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'settings' => 'array',
+    ];
+
+    protected $appends = ['casted_settings'];
+
+    public function getCastedSettingsAttribute()
+    {
+        return json_decode($this->settings);
+    }
 }

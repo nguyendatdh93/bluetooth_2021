@@ -16,10 +16,7 @@ class CreateMeasureMeasparasTable extends Migration
         Schema::create('measure_measparas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sensor_measure_id')->index();
-            $table->string('setname');
-            $table->integer('bacs');
-            $table->integer('crng');
-            $table->integer('eqp1');
+            $table->json('settings');
             $table->timestamps();
         });
     }

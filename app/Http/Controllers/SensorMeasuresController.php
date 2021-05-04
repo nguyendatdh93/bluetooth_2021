@@ -30,12 +30,15 @@ class SensorMeasuresController extends Controller
         }
     }
 
-    public function paginate($sensorId)
+    public function paginate(Request $request, $sensorId)
     {
-        $sensorMeasures = SensorMeasure::with(['measureMeasba', 'measureMeasdet', 'measureMeaspara', 'measureMeasres'])
-            ->where('sensor_id', $sensorId)
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+        $sensorMeasures = SensorMeasure::where('sensor_id', $sensorId)
+            ->orderBy('id', 'desc');
+        if ((int)$request->get('ful')) {
+            $sensorMeasures->with(['measureMeasba', 'measureMeasdet', 'measureMeaspara', 'measureMeasres']);
+        }
+
+        $sensorMeasures = $sensorMeasures->paginate(10);
         return SensorMeasureResource::collection($sensorMeasures);
     }
 
@@ -76,10 +79,7 @@ class SensorMeasuresController extends Controller
         if ($measpara = $request->get('measpara')) {
             $sensorMeasure->measureMeaspara()->delete();
             $sensorMeasure->measureMeaspara()->create([
-                'setname' => $measpara['setname'],
-                'bacs' => $measpara['bacs'],
-                'crng' => $measpara['crng'],
-                'eqp1' => $measpara['eqp1'],
+                'settings' => json_encode($measpara),
             ]);
         }
     }
@@ -103,7 +103,6 @@ class SensorMeasuresController extends Controller
         ];
         if ($request->get('sensor_id') && $request->get('sensor_setting_id')) {
             $sensorMeasureData['sensor_id'] = $request->get('sensor_id');
-            $sensorMeasureData['sensor_setting_id'] = $request->get('sensor_setting_id');
         }
 
         return SensorMeasure::updateOrCreate([
