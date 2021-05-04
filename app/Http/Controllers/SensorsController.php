@@ -9,14 +9,16 @@ use Illuminate\Http\Request;
 
 class SensorsController extends Controller
 {
-    public function store(StoreSensorRequest $request)
+    public function store(StoreSensorRequest $request, $id = 0)
     {
         return Sensor::updateOrCreate([
-            'id' => $request->get('id') ?? 0,
+            'id' => $id,
         ], [
             'mac_device' => $request->get('mac_device'),
             'name' => $request->get('name'),
             'datetime' => $request->get('datetime'),
+            'peakmode' => $request->get('peakmode'),
+            'powoffmin' => $request->get('powoffmin'),
         ]);
     }
 

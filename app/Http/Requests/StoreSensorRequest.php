@@ -27,11 +27,19 @@ class StoreSensorRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'mac_device' => 'string|max:50|unique:sensors,mac_device',
+        $rules = [
+            'mac_device' => ['string', 'max:50'],
             'name' => 'required|string|max:20',
             'datetime' => 'required',
+            'peakmode' => 'required|numeric',
+            'powoffmin' => 'required|numeric|min:0|max:60',
         ];
+
+        if (!$this->route('id')) {
+            $rules['mac_device'][] = 'unique:sensors,mac_device';
+        }
+
+        return $rules;
     }
 
     protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)

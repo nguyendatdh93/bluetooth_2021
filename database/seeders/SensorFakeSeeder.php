@@ -20,6 +20,8 @@ class SensorFakeSeeder extends Seeder
                 'mac_device' => 'mac_device_' . $i,
                 'name' => 'sensor ' . ($i + 1),
                 'datetime' => Carbon::now()->subMinutes(rand(1, 10)),
+                'peakmode' => rand(1, 10),
+                'powoffmin' => rand(0, 60),
             ]);
         }
     }

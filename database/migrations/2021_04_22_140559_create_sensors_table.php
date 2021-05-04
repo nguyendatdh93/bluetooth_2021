@@ -18,6 +18,8 @@ class CreateSensorsTable extends Migration
             $table->string('mac_device', 50)->nullable();
             $table->string('name');
             $table->dateTime('datetime');
+            $table->integer('peakmode');
+            $table->integer('powoffmin');
             $table->timestamps();
         });
     }
