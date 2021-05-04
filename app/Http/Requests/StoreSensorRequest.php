@@ -28,11 +28,11 @@ class StoreSensorRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'mac_device' => ['nullable', 'string', 'max:50'],
             'name' => 'required|string|max:20',
-            'datetime' => 'required',
-            'peakmode' => 'required|numeric',
-            'powoffmin' => 'required|numeric|min:0|max:60',
+            'mac_device' => ['nullable', 'string', 'max:50'],
+            'datetime' => 'nullable',
+            'peakmode' => 'nullable|numeric',
+            'powoffmin' => 'nullable|numeric|min:0|max:60',
         ];
 
         if (!$this->route('id')) {

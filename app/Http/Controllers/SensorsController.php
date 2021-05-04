@@ -16,9 +16,9 @@ class SensorsController extends Controller
         ], [
             'mac_device' => $request->get('mac_device') ?? null,
             'name' => $request->get('name'),
-            'datetime' => $request->get('datetime'),
-            'peakmode' => $request->get('peakmode'),
-            'powoffmin' => $request->get('powoffmin'),
+            'datetime' => $request->get('datetime') ?? null,
+            'peakmode' => $request->get('peakmode') ?? null,
+            'powoffmin' => $request->get('powoffmin') ?? null,
         ]);
     }
 

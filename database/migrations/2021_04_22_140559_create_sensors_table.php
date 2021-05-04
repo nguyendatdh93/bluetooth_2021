@@ -15,11 +15,11 @@ class CreateSensorsTable extends Migration
     {
         Schema::create('sensors', function (Blueprint $table) {
             $table->id();
-            $table->string('mac_device', 50)->nullable();
             $table->string('name');
-            $table->dateTime('datetime');
-            $table->integer('peakmode');
-            $table->integer('powoffmin');
+            $table->string('mac_device', 50)->nullable();
+            $table->dateTime('datetime')->nullable();
+            $table->integer('peakmode')->nullable();
+            $table->integer('powoffmin')->nullable();
             $table->timestamps();
         });
     }
