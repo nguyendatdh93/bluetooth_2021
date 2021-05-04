@@ -36,7 +36,7 @@ class SensorMeasureFakeSeeder extends Seeder
                         ]);
 
                         $sensorMeasure->measureMeaspara()->create([
-                            'settings' => json_decode(['setname' => 'name1', 'bacs' => rand(1, 5), 'crng' => 1, 'eqp1' => rand(1, 1000)]),
+                            'settings' => json_encode(['setname' => 'name1', 'bacs' => rand(1, 5), 'crng' => 1, 'eqp1' => rand(1, 1000)]),
                         ]);
 
                         $sensorMeasure->measureMeasdet()->create([
