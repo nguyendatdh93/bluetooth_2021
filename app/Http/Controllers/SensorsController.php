@@ -14,7 +14,7 @@ class SensorsController extends Controller
         return Sensor::updateOrCreate([
             'id' => $id,
         ], [
-            'mac_device' => $request->get('mac_device'),
+            'mac_device' => $request->get('mac_device') ?? null,
             'name' => $request->get('name'),
             'datetime' => $request->get('datetime'),
             'peakmode' => $request->get('peakmode'),

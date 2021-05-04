@@ -28,7 +28,7 @@ class StoreSensorRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'mac_device' => ['string', 'max:50'],
+            'mac_device' => ['nullable', 'string', 'max:50'],
             'name' => 'required|string|max:20',
             'datetime' => 'required',
             'peakmode' => 'required|numeric',
