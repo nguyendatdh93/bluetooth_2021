@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SensorFakeSeeder::class);
         $this->call(SensorSettingFakeSeeder::class);
         $this->call(BacSettingFakeSeeder::class);
-        $this->call();
+        $this->call(SensorMeasureFakeSeeder::class);
     }
 }
