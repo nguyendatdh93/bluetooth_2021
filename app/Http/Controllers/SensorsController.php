@@ -25,9 +25,9 @@ class SensorsController extends Controller
     public function gets($id = 0)
     {
         if ($id) {
-            $sensors = Sensor::where('id', $id)->get();
+            $sensors = Sensor::where('id', $id)->orderBy('id', 'desc')->get();
         } else {
-            $sensors = Sensor::all();
+            $sensors = Sensor::orderBy('id', 'desc')->get();
         }
 
         return SensorResource::collection($sensors);
