@@ -25,7 +25,7 @@ class SensorSettingsController extends Controller
             }
 
             DB::commit();
-            $setting = SensorSetting::with(['bac'])->where('id', $sensorId)->get();
+            $setting = SensorSetting::with(['bac'])->where('id', $setting->id)->get();
             return SensorSettingResource::collection(collect($setting));
         } catch (\Exception $e) {
             DB::rollBack();
