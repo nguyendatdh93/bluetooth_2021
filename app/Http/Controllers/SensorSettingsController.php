@@ -25,7 +25,7 @@ class SensorSettingsController extends Controller
             }
 
             DB::commit();
-            $setting = SensorSetting::with(['bacSettings'])->where('id', $sensorId)->get();
+            $setting = SensorSetting::with(['bac'])->where('id', $sensorId)->get();
             return SensorSettingResource::collection(collect($setting));
         } catch (\Exception $e) {
             DB::rollBack();
@@ -35,7 +35,7 @@ class SensorSettingsController extends Controller
 
     public function gets($sensorId, $settingId = 0)
     {
-        $settings = SensorSetting::with(['bacSettings'])->where('sensor_id', $sensorId);
+        $settings = SensorSetting::with(['bac'])->where('sensor_id', $sensorId);
         if ($settingId > 0) {
             $settings->where('id', $settingId);
         }

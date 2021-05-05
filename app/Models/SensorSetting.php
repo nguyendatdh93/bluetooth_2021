@@ -15,7 +15,7 @@ class SensorSetting extends Model
         'stp', 'enp', 'pp', 'dlte', 'pwd', 'ptm', 'ibst', 'iben', 'ifst', 'ifen'
     ];
 
-    public function bacSettings()
+    public function bac()
     {
         return $this->hasMany(BacSetting::class);
     }
