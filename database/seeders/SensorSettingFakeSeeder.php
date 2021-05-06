@@ -24,7 +24,6 @@ class SensorSettingFakeSeeder extends Seeder
                     DB::beginTransaction();
                     $bacNumber = rand(1, 5);
                     $sensorSetting = SensorSetting::create([
-                        'sensor_id' => $sensor->id,
                         'setname' => 'setname_' . $sensor->id . '_' . $i,
                         'bacs' => $bacNumber,
                         'crng' => rand(0, 2),

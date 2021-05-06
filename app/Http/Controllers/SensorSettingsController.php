@@ -11,10 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class SensorSettingsController extends Controller
 {
-    public function store(StoreSensorSettingRequest $request, $sensorId, $settingId = 0)
+    public function store(StoreSensorSettingRequest $request, $settingId = 0)
     {
         $settingData = $request->all();
-        $settingData['sensor_id'] = $sensorId;
         try {
             DB::beginTransaction();
             $setting = SensorSetting::updateOrCreate(['id' => $settingId], $settingData);
@@ -33,9 +32,9 @@ class SensorSettingsController extends Controller
         }
     }
 
-    public function gets($sensorId, $settingId = 0)
+    public function gets($settingId = 0)
     {
-        $settings = SensorSetting::with(['bac'])->where('sensor_id', $sensorId);
+        $settings = SensorSetting::with(['bac']);
         if ($settingId > 0) {
             $settings->where('id', $settingId);
         }

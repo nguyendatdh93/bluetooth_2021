@@ -11,9 +11,4 @@ class Sensor extends Model
     use HasFactory;
 
     protected $guarded = [];
-
-    public function settings()
-    {
-        return $this->hasMany(SensorSetting::class);
-    }
 }

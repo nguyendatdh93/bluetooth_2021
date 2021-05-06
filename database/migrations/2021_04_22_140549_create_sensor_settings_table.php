@@ -15,7 +15,6 @@ class CreateSensorSettingsTable extends Migration
     {
         Schema::create('sensor_settings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sensor_id');
             $table->string('setname');
             $table->integer('bacs');
             $table->tinyInteger('crng');
