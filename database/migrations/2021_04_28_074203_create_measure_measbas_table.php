@@ -17,6 +17,7 @@ class CreateMeasureMeasbasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('sensor_measure_id')->index();
             $table->dateTime('datetime');
+            $table->integer('num');
             $table->integer('pastaerr');
             $table->timestamps();
         });

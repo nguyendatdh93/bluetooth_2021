@@ -38,7 +38,7 @@ class SensorMeasuresController extends Controller
             $sensorMeasures->with(['measureMeasba', 'measureMeasdet', 'measureMeaspara', 'measureMeasres']);
         }
 
-        $sensorMeasures = $sensorMeasures->paginate(10);
+        $sensorMeasures = $sensorMeasures->paginate(100);
         return SensorMeasureResource::collection($sensorMeasures);
     }
 
@@ -69,7 +69,13 @@ class SensorMeasuresController extends Controller
         if ($measdet = $request->get('measdet')) {
             $sensorMeasure->measureMeasdet()->delete();
             $sensorMeasure->measureMeasdet()->create([
-                'rawdmp' => json_encode($measdet['rawdmp']),
+                'no' => $measdet['no'],
+                'deltae' => $measdet['deltae'],
+                'deltal' => $measdet['deltal'],
+                'eb' => $measdet['eb'],
+                'lb' => $measdet['lb'],
+                'ef' => $measdet['ef'],
+                'lf' => $measdet['lf'],
             ]);
         }
     }
@@ -90,6 +96,7 @@ class SensorMeasuresController extends Controller
             $sensorMeasure->measureMeasba()->delete();
             $sensorMeasure->measureMeasba()->create([
                 'datetime' => $measba['datetime'],
+                'num' => $measba['num'],
                 'pastaerr' => $measba['pastaerr'],
             ]);
         }
@@ -101,7 +108,7 @@ class SensorMeasuresController extends Controller
             'datetime' => $request->get('datetime'),
             'measure_id' => $request->get('measure_id'),
         ];
-        if ($request->get('sensor_id') && $request->get('sensor_setting_id')) {
+        if ($request->get('sensor_id')) {
             $sensorMeasureData['sensor_id'] = $request->get('sensor_id');
         }
 

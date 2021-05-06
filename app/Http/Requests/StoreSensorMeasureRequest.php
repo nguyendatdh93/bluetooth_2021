@@ -38,6 +38,7 @@ class StoreSensorMeasureRequest extends FormRequest
 
         if (!empty($this->get('measba'))) {
             $rules['measba.datetime'] = 'required';
+            $rules['measba.num'] = 'required|numeric';
             $rules['measba.pastaerr'] = 'required|numeric';
         }
 
@@ -46,7 +47,14 @@ class StoreSensorMeasureRequest extends FormRequest
         }
 
         if (!empty($this->get('measdet'))) {
-            $rules['measdet.rawdmp'] = 'required|array';
+            $rules['measdet.no'] = 'required|string';
+            $rules['measdet.deltae'] = 'required|numeric';
+            $rules['measdet.deltal'] = 'required|regex:/^\d+(\.\d{1,2})?$/';
+            $rules['measdet.eb'] = 'required|numeric';
+            $rules['measdet.lb'] = 'required|regex:/^\d+(\.\d{1,2})?$/';
+            $rules['measdet.ef'] = 'required|numeric';
+            $rules['measdet.lf'] = 'required|regex:/^\d+(\.\d{1,2})?$/';
+
         }
 
         if (!empty($this->get('measres'))) {

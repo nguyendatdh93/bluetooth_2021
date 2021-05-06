@@ -16,7 +16,13 @@ class CreateMeasureMeasdetsTable extends Migration
         Schema::create('measure_measdets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sensor_measure_id')->index();
-            $table->json('rawdmp');
+            $table->string('no');
+            $table->integer('deltae');
+            $table->double('deltal');
+            $table->integer('eb');
+            $table->double('lb');
+            $table->integer('ef');
+            $table->double('lf');
             $table->timestamps();
         });
     }
