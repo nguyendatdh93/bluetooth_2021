@@ -39,7 +39,7 @@ class SensorSettingsController extends Controller
             $settings->where('id', $settingId);
         }
 
-        return SensorSettingResource::collection($settings->get());
+        return SensorSettingResource::collection($settings->orderBy('id', 'desc')->get());
     }
 
     public function delete($settingId)
