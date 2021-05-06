@@ -20,6 +20,8 @@ class SensorsController extends Controller
             'peakmode' => $request->get('peakmode') ?? null,
             'powoffmin' => $request->get('powoffmin') ?? null,
         ]);
+
+
     }
 
     public function gets($id = 0)
