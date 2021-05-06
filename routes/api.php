@@ -20,17 +20,6 @@ Route::middleware('api.token')->prefix('sensor')->group(function () {
         ->where('id', '[0-9]+')
         ->name('sensor.gets');
 
-    Route::post('/setting/{settingId?}', [\App\Http\Controllers\SensorSettingsController::class, 'store'])
-        ->where('sensorId', '[0-9]+')
-        ->name('sensor.setting.store');
-    Route::get('/settings/{settingId?}', [\App\Http\Controllers\SensorSettingsController::class, 'gets'])
-        ->where('sensorId', '[0-9]+')
-        ->where('settingId', '[0-9]+')
-        ->name('sensor.settings.get');
-    Route::delete('/setting/{settingId?}', [\App\Http\Controllers\SensorSettingsController::class, 'delete'])
-        ->where('settingId', '[0-9]+')
-        ->name('sensor.settings.delete');
-
     Route::post('/measure/{id?}', [\App\Http\Controllers\SensorMeasuresController::class, 'store'])
         ->where('id', '[0-9]+')
         ->name('sensor.measure.store');
@@ -40,4 +29,18 @@ Route::middleware('api.token')->prefix('sensor')->group(function () {
     Route::get('measure/{sensorMeasureId}', [\App\Http\Controllers\SensorMeasuresController::class, 'get'])
         ->where('sensorMeasureId', '[0-9]+')
         ->name('sensor.measure.get');
+});
+
+Route::middleware('api.token')->prefix('setting')->group(function () {
+    Route::post('/{settingId?}', [\App\Http\Controllers\SensorSettingsController::class, 'store'])
+        ->where('sensorId', '[0-9]+')
+        ->name('sensor.setting.store');
+    Route::get('/{settingId?}', [\App\Http\Controllers\SensorSettingsController::class, 'gets'])
+        ->where('sensorId', '[0-9]+')
+        ->where('settingId', '[0-9]+')
+        ->name('sensor.setting.get');
+    Route::delete('/{settingId?}', [\App\Http\Controllers\SensorSettingsController::class, 'delete'])
+        ->where('settingId', '[0-9]+')
+        ->name('sensor.settings.delete');
+
 });
