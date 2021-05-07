@@ -30,6 +30,10 @@ class StoreSensorMeasureRequest extends FormRequest
         $rules = [
             'datetime' => 'required',
             'no' => 'required|string',
+            'blpsx' => 'required|string|max:10',
+            'blpsy' => 'required|string|max:10',
+            'blpex' => 'required|string|max:10',
+            'blpey' => 'required|string|max:10',
         ];
 
         if (empty($this->route('id'))) {

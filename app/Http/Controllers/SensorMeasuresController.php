@@ -111,6 +111,10 @@ class SensorMeasuresController extends Controller
         $sensorMeasureData = [
             'datetime' => $request->get('datetime'),
             'no' => $request->get('no'),
+            'blpsx' => $request->get('blpsx'),
+            'blpsy' => $request->get('blpsy'),
+            'blpex' => $request->get('blpex'),
+            'blpey' => $request->get('blpey'),
         ];
         if ($request->get('sensor_id')) {
             $sensorMeasureData['sensor_id'] = $request->get('sensor_id');
