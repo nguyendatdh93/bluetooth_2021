@@ -19,7 +19,7 @@ class SensorMeasure extends Model
 
     public function measureMeasdet()
     {
-        return $this->hasOne(MeasureMeasdet::class);
+        return $this->hasMany(MeasureMeasdet::class);
     }
 
     public function measureMeaspara()
@@ -29,6 +29,6 @@ class SensorMeasure extends Model
 
     public function measureMeasres()
     {
-        return $this->hasOne(MeasureMeasres::class);
+        return $this->hasMany(MeasureMeasres::class);
     }
 }

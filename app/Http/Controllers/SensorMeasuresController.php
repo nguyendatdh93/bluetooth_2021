@@ -54,13 +54,15 @@ class SensorMeasuresController extends Controller
     {
         if ($measres = $request->get('measres')) {
             $sensorMeasure->measureMeasres()->delete();
-            $sensorMeasure->measureMeasres()->create([
-                'name' => $measres['name'],
-                'pkpot' => $measres['pkpot'],
-                'dltc' => $measres['dltc'],
-                'bgc' => $measres['bgc'],
-                'err' => $measres['err'],
-            ]);
+            foreach ($measres as $item) {
+                $sensorMeasure->measureMeasres()->create([
+                    'name' => $item['name'],
+                    'pkpot' => $item['pkpot'],
+                    'dltc' => $item['dltc'],
+                    'bgc' => $item['bgc'],
+                    'err' => $item['err'],
+                ]);
+            }
         }
     }
 
@@ -68,15 +70,17 @@ class SensorMeasuresController extends Controller
     {
         if ($measdet = $request->get('measdet')) {
             $sensorMeasure->measureMeasdet()->delete();
-            $sensorMeasure->measureMeasdet()->create([
-                'no' => $measdet['no'],
-                'deltae' => $measdet['deltae'],
-                'deltal' => $measdet['deltal'],
-                'eb' => $measdet['eb'],
-                'lb' => $measdet['lb'],
-                'ef' => $measdet['ef'],
-                'lf' => $measdet['lf'],
-            ]);
+            foreach ($measdet as $item) {
+                $sensorMeasure->measureMeasdet()->create([
+                    'no' => $item['no'],
+                    'deltae' => $item['deltae'],
+                    'deltal' => $item['deltal'],
+                    'eb' => $item['eb'],
+                    'lb' => $item['lb'],
+                    'ef' => $item['ef'],
+                    'lf' => $item['lf'],
+                ]);
+            }
         }
     }
 
@@ -106,7 +110,7 @@ class SensorMeasuresController extends Controller
     {
         $sensorMeasureData = [
             'datetime' => $request->get('datetime'),
-            'measure_id' => $request->get('measure_id'),
+            'no' => $request->get('no'),
         ];
         if ($request->get('sensor_id')) {
             $sensorMeasureData['sensor_id'] = $request->get('sensor_id');
