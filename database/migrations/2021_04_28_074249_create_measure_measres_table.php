@@ -21,6 +21,10 @@ class CreateMeasureMeasresTable extends Migration
             $table->integer('dltc');
             $table->integer('bgc');
             $table->integer('err');
+            $table->string('blpsx', 10);
+            $table->string('blpsy', 10);
+            $table->string('blpex', 10);
+            $table->string('blpey', 10);
             $table->timestamps();
         });
     }

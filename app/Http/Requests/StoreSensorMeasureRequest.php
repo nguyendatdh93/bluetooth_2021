@@ -30,10 +30,6 @@ class StoreSensorMeasureRequest extends FormRequest
         $rules = [
             'datetime' => 'required',
             'no' => 'required|string',
-            'blpsx' => 'required|string|max:10',
-            'blpsy' => 'required|string|max:10',
-            'blpex' => 'required|string|max:10',
-            'blpey' => 'required|string|max:10',
         ];
 
         if (empty($this->route('id'))) {
@@ -67,6 +63,10 @@ class StoreSensorMeasureRequest extends FormRequest
             $rules['measres.*.dltc'] = 'required|numeric';
             $rules['measres.*.bgc'] = 'required|numeric';
             $rules['measres.*.err'] = 'required|numeric';
+            $rules['measres.*.blpsx'] = 'required|string|max:10';
+            $rules['measres.*.blpsy'] = 'required|string|max:10';
+            $rules['measres.*.blpex'] = 'required|string|max:10';
+            $rules['measres.*.blpey'] = 'required|string|max:10';
         }
 
         return $rules;

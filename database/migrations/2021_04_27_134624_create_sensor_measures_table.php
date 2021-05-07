@@ -18,10 +18,6 @@ class CreateSensorMeasuresTable extends Migration
             $table->unsignedBigInteger('sensor_id')->index();
             $table->dateTime('datetime');
             $table->string('no', 4)->comment('0 to 100');
-            $table->string('blpsx', 10);
-            $table->string('blpsy', 10);
-            $table->string('blpex', 10);
-            $table->string('blpey', 10);
             $table->timestamps();
         });
     }
