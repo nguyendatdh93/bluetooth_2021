@@ -18,11 +18,11 @@ class CreateMeasureMeasdetsTable extends Migration
             $table->unsignedBigInteger('sensor_measure_id')->index();
             $table->string('no');
             $table->integer('deltae');
-            $table->double('deltal');
+            $table->float('deltai');
             $table->integer('eb');
-            $table->double('lb');
+            $table->float('lb');
             $table->integer('ef');
-            $table->double('lf');
+            $table->float('lf');
             $table->timestamps();
         });
     }

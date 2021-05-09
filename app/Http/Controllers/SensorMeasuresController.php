@@ -78,7 +78,7 @@ class SensorMeasuresController extends Controller
                 $sensorMeasure->measureMeasdet()->create([
                     'no' => $item['no'],
                     'deltae' => $item['deltae'],
-                    'deltal' => $item['deltal'],
+                    'deltai' => $item['deltai'],
                     'eb' => $item['eb'],
                     'lb' => $item['lb'],
                     'ef' => $item['ef'],

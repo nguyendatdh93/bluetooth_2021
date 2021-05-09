@@ -49,11 +49,11 @@ class StoreSensorMeasureRequest extends FormRequest
         if (!empty($this->get('measdet'))) {
             $rules['measdet.*.no'] = 'required|string';
             $rules['measdet.*.deltae'] = 'required|numeric';
-            $rules['measdet.*.deltal'] = 'required|regex:/^\d+(\.\d{1,2})?$/';
+            $rules['measdet.*.deltai'] = 'required|numeric';
             $rules['measdet.*.eb'] = 'required|numeric';
-            $rules['measdet.*.lb'] = 'required|regex:/^\d+(\.\d{1,2})?$/';
+            $rules['measdet.*.lb'] = 'required|numeric';
             $rules['measdet.*.ef'] = 'required|numeric';
-            $rules['measdet.*.lf'] = 'required|regex:/^\d+(\.\d{1,2})?$/';
+            $rules['measdet.*.lf'] = 'required|numeric';
 
         }
 
