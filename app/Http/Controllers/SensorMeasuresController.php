@@ -105,7 +105,7 @@ class SensorMeasuresController extends Controller
             $sensorMeasure->measureMeasba()->create([
                 'datetime' => $measba['datetime'],
                 'num' => $measba['num'],
-                'pastaerr' => $measba['pastaerr'],
+                'pstaterr' => $measba['pstaterr'],
             ]);
         }
     }

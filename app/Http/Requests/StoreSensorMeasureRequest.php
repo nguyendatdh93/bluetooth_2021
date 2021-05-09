@@ -39,7 +39,7 @@ class StoreSensorMeasureRequest extends FormRequest
         if (!empty($this->get('measba'))) {
             $rules['measba.datetime'] = 'required';
             $rules['measba.num'] = 'required|numeric';
-            $rules['measba.pastaerr'] = 'required|numeric';
+            $rules['measba.pstaterr'] = 'required|numeric';
         }
 
         if (!empty($this->get('measpara'))) {
