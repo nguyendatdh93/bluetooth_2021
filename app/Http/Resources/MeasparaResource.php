@@ -16,7 +16,7 @@ class MeasparaResource extends JsonResource
     public function toArray($request)
     {
         $data = json_decode($this->settings);
-        if ($this->isJsonString($data->bac)) {
+        if (is_string($data->bac) && $this->isJsonString($data->bac)) {
             $data->bac = json_decode($data->bac);
         }
 
