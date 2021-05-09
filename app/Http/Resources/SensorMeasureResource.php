@@ -37,7 +37,7 @@ class SensorMeasureResource extends JsonResource
         }
 
         if ($this->whenLoaded('measba')) {
-            $data['measba'] = new MeasparaResource($this->measba);
+            $data['measba'] = new MeasbaResource($this->measba);
         }
 
         return $data;
