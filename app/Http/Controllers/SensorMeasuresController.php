@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSensorMeasureRequest;
 use App\Http\Resources\SensorMeasureResource;
+use App\Http\Resources\SensorMeasureWithoutRelationsResource;
 use App\Models\SensorMeasure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,12 +35,8 @@ class SensorMeasuresController extends Controller
     {
         $sensorMeasures = SensorMeasure::where('sensor_id', $sensorId)
             ->orderBy('id', 'desc');
-        if ((int)$request->get('ful')) {
-            $sensorMeasures->with(['measba', 'measdet', 'measpara', 'measres']);
-        }
-
         $sensorMeasures = $sensorMeasures->paginate(100);
-        return SensorMeasureResource::collection($sensorMeasures);
+        return SensorMeasureWithoutRelationsResource::collection($sensorMeasures);
     }
 
     public function get($sensorMeasureId)
