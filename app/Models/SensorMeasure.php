@@ -12,22 +12,22 @@ class SensorMeasure extends Model
 
     protected $guarded = [];
 
-    public function measureMeasba()
+    public function measba()
     {
         return $this->hasOne(MeasureMeasba::class);
     }
 
-    public function measureMeasdet()
+    public function measdet()
     {
         return $this->hasMany(MeasureMeasdet::class);
     }
 
-    public function measureMeaspara()
+    public function measpara()
     {
         return $this->hasOne(MeasureMeaspara::class);
     }
 
-    public function measureMeasres()
+    public function measres()
     {
         return $this->hasMany(MeasureMeasres::class);
     }

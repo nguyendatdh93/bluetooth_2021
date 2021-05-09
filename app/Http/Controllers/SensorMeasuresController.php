@@ -20,7 +20,7 @@ class SensorMeasuresController extends Controller
             $this->storeMeasdet($request, $sensorMeasure);
             $this->storeMeasres($request, $sensorMeasure);
             DB::commit();
-            $sensorMeasure = SensorMeasure::with(['measureMeasba', 'measureMeasdet', 'measureMeaspara', 'measureMeasres'])
+            $sensorMeasure = SensorMeasure::with(['measba', 'measdet', 'measpara', 'measres'])
                 ->where('id', $sensorMeasure->id)
                 ->first();
             return new SensorMeasureResource($sensorMeasure);
@@ -35,16 +35,20 @@ class SensorMeasuresController extends Controller
         $sensorMeasures = SensorMeasure::where('sensor_id', $sensorId)
             ->orderBy('id', 'desc');
         if ((int)$request->get('ful')) {
-            $sensorMeasures->with(['measureMeasba', 'measureMeasdet', 'measureMeaspara', 'measureMeasres']);
+            $sensorMeasures->with(['measba', 'measdet', 'measpara', 'measres']);
         }
 
         $sensorMeasures = $sensorMeasures->paginate(100);
+        foreach ($sensorMeasures->measpara as $measpara) {
+            $sensorMeasures->measpara = $measpara->casted_settings;
+        }
+
         return SensorMeasureResource::collection($sensorMeasures);
     }
 
     public function get($sensorMeasureId)
     {
-        $sensorMeasure = SensorMeasure::with(['measureMeasba', 'measureMeasdet', 'measureMeaspara', 'measureMeasres'])
+        $sensorMeasure = SensorMeasure::with(['measba', 'measdet', 'measpara', 'measres'])
             ->where('id', $sensorMeasureId)
             ->first();
         return new SensorMeasureResource($sensorMeasure);
@@ -53,9 +57,9 @@ class SensorMeasuresController extends Controller
     private function storeMeasres($request, $sensorMeasure)
     {
         if ($measres = $request->get('measres')) {
-            $sensorMeasure->measureMeasres()->delete();
+            $sensorMeasure->measres()->delete();
             foreach ($measres as $item) {
-                $sensorMeasure->measureMeasres()->create([
+                $sensorMeasure->measres()->create([
                     'name' => $item['name'],
                     'pkpot' => $item['pkpot'],
                     'dltc' => $item['dltc'],
@@ -73,9 +77,9 @@ class SensorMeasuresController extends Controller
     private function storeMeasdet($request, $sensorMeasure)
     {
         if ($measdet = $request->get('measdet')) {
-            $sensorMeasure->measureMeasdet()->delete();
+            $sensorMeasure->measdet()->delete();
             foreach ($measdet as $item) {
-                $sensorMeasure->measureMeasdet()->create([
+                $sensorMeasure->measdet()->create([
                     'no' => $item['no'],
                     'deltae' => $item['deltae'],
                     'deltai' => $item['deltai'],
@@ -91,8 +95,8 @@ class SensorMeasuresController extends Controller
     private function storeMeaspara($request, $sensorMeasure)
     {
         if ($measpara = $request->get('measpara')) {
-            $sensorMeasure->measureMeaspara()->delete();
-            $sensorMeasure->measureMeaspara()->create([
+            $sensorMeasure->measpara()->delete();
+            $sensorMeasure->measpara()->create([
                 'settings' => json_encode($measpara),
             ]);
         }
@@ -101,8 +105,8 @@ class SensorMeasuresController extends Controller
     private function storeMeasba($request, $sensorMeasure)
     {
         if ($measba = $request->get('measba')) {
-            $sensorMeasure->measureMeasba()->delete();
-            $sensorMeasure->measureMeasba()->create([
+            $sensorMeasure->measba()->delete();
+            $sensorMeasure->measba()->create([
                 'datetime' => $measba['datetime'],
                 'num' => $measba['num'],
                 'pstaterr' => $measba['pstaterr'],

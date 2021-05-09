@@ -14,11 +14,4 @@ class MeasureMeasdet extends Model
     protected $casts = [
         'rawdmp' => 'array',
     ];
-
-    protected $appends = ['casted_rawdmp'];
-
-    public function getCastedRawdmpAttribute()
-    {
-        return json_decode($this->rawdmp);
-    }
 }

@@ -13,7 +13,7 @@ class MeasureMeaspara extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'settings' => 'array',
+        'settings' => 'object',
     ];
 
     protected $appends = ['casted_settings'];
