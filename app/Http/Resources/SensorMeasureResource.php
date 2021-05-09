@@ -15,17 +15,31 @@ class SensorMeasureResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $data = [
             'id' => $this->id,
             'sensor_id' => $this->sensor_id,
             'datetime' => $this->datetime,
             'no' => $this->no,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
-            'measpara' => new MeasparaResource($this->measpara),
-            'measdet' => MeasdetResource::collection($this->measdet),
-            'measres' => MeasresResource::collection($this->measres),
-            'measba' => new MeasbaResource($this->measba),
         ];
+
+        if ($this->whenLoaded('measpara')) {
+            $data['measpara'] = new MeasparaResource($this->measpara);
+        }
+
+        if ($this->whenLoaded('measdet')) {
+            $data['measdet'] = MeasdetResource::collection($this->measdet);
+        }
+
+        if ($this->whenLoaded('measres')) {
+            $data['measres'] = MeasresResource::collection($this->measres);
+        }
+
+        if ($this->whenLoaded('measba')) {
+            $data['measba'] = new MeasparaResource($this->measba);
+        }
+
+        return $data;
     }
 }

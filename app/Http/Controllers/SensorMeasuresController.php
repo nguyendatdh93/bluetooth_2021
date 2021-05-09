@@ -39,10 +39,6 @@ class SensorMeasuresController extends Controller
         }
 
         $sensorMeasures = $sensorMeasures->paginate(100);
-        foreach ($sensorMeasures->measpara as $measpara) {
-            $sensorMeasures->measpara = $measpara->casted_settings;
-        }
-
         return SensorMeasureResource::collection($sensorMeasures);
     }
 
