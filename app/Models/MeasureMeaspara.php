@@ -15,11 +15,4 @@ class MeasureMeaspara extends Model
     protected $casts = [
         'settings' => 'object',
     ];
-
-    protected $appends = ['casted_settings'];
-
-    public function getCastedSettingsAttribute()
-    {
-        return json_decode($this->settings);
-    }
 }

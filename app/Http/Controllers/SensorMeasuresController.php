@@ -93,7 +93,7 @@ class SensorMeasuresController extends Controller
         if ($measpara = $request->get('measpara')) {
             $sensorMeasure->measpara()->delete();
             $sensorMeasure->measpara()->create([
-                'settings' => json_encode($measpara),
+                'settings' => json_encode($measpara, JSON_NUMERIC_CHECK),
             ]);
         }
     }
