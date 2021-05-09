@@ -51,9 +51,9 @@ class StoreSensorMeasureRequest extends FormRequest
             $rules['measdet.*.deltae'] = 'required|numeric';
             $rules['measdet.*.deltai'] = 'required|numeric';
             $rules['measdet.*.eb'] = 'required|numeric';
-            $rules['measdet.*.lb'] = 'required|numeric';
+            $rules['measdet.*.ib'] = 'required|numeric';
             $rules['measdet.*.ef'] = 'required|numeric';
-            $rules['measdet.*.lf'] = 'required|numeric';
+            $rules['measdet.*.if'] = 'required|numeric';
 
         }
 

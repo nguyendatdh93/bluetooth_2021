@@ -20,9 +20,9 @@ class CreateMeasureMeasdetsTable extends Migration
             $table->integer('deltae');
             $table->float('deltai');
             $table->integer('eb');
-            $table->float('lb');
+            $table->float('ib');
             $table->integer('ef');
-            $table->float('lf');
+            $table->float('if');
             $table->timestamps();
         });
     }

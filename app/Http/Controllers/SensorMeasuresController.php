@@ -80,9 +80,9 @@ class SensorMeasuresController extends Controller
                     'deltae' => $item['deltae'],
                     'deltai' => $item['deltai'],
                     'eb' => $item['eb'],
-                    'lb' => $item['lb'],
+                    'ib' => $item['ib'],
                     'ef' => $item['ef'],
-                    'lf' => $item['lf'],
+                    'if' => $item['if'],
                 ]);
             }
         }
