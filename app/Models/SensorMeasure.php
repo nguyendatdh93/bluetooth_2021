@@ -14,7 +14,7 @@ class SensorMeasure extends Model
 
     public function measba()
     {
-        return $this->hasOne(MeasureMeasba::class);
+        return $this->hasOne(MeasureMeasbas::class);
     }
 
     public function measdet()

@@ -13,7 +13,7 @@ class CreateMeasureMeasbasTable extends Migration
      */
     public function up()
     {
-        Schema::create('measure_measbas', function (Blueprint $table) {
+        Schema::create('measure_measbass', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sensor_measure_id')->index();
             $table->dateTime('datetime');
