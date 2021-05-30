@@ -34,4 +34,11 @@ class SensorsController extends Controller
 
         return SensorResource::collection($sensors);
     }
+
+    public function getViaMacDevice($macDevice)
+    {
+        $sensor = Sensor::where('mac_device', $macDevice)->first();
+
+        return new SensorResource($sensor);
+    }
 }
