@@ -21,6 +21,20 @@ class StoreSensorMeasureRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        if (!empty($this->get('measdet')) && is_string($this->get('measdet'))) {
+            $this->merge([
+                'measdet' => json_decode($this->get('measdet'), JSON_NUMERIC_CHECK),
+            ]);
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -36,7 +50,7 @@ class StoreSensorMeasureRequest extends FormRequest
             $rules['sensor_id'] = ['required', 'numeric', 'min:1', new CheckSettingRelationRule($this->get('sensor_id') ?? 0, $this->get('sensor_setting_id') ?? 0)];
         }
 
-        if (!empty($this->get('measba'))) {
+        if (!empty($this->get('measba')) && is_array($this->get('measba'))) {
             $rules['measba.datetime'] = 'required';
             $rules['measba.num'] = 'required|numeric';
             $rules['measba.pstaterr'] = 'required|numeric';
@@ -46,7 +60,7 @@ class StoreSensorMeasureRequest extends FormRequest
             $rules['measpara'] = 'required|array';
         }
 
-        if (!empty($this->get('measdet'))) {
+        if (!empty($this->get('measdet')) && is_array($this->get('measdet'))) {
             $rules['measdet.*.no'] = 'required|string';
             $rules['measdet.*.deltae'] = 'required|numeric';
             $rules['measdet.*.deltai'] = 'required|numeric';
@@ -54,7 +68,6 @@ class StoreSensorMeasureRequest extends FormRequest
             $rules['measdet.*.ib'] = 'required|numeric';
             $rules['measdet.*.ef'] = 'required|numeric';
             $rules['measdet.*.if'] = 'required|numeric';
-
         }
 
         if (!empty($this->get('measres'))) {
