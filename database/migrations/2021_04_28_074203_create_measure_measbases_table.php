@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMeasureMeasbasTable extends Migration
+class CreateMeasureMeasbasesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMeasureMeasbasTable extends Migration
      */
     public function up()
     {
-        Schema::create('measure_measbass', function (Blueprint $table) {
+        Schema::create('measure_measbases', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sensor_measure_id')->index();
             $table->dateTime('datetime');
@@ -30,6 +30,6 @@ class CreateMeasureMeasbasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('measure_measbas');
+        Schema::dropIfExists('measure_measbases');
     }
 }

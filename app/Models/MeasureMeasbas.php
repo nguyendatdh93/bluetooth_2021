@@ -10,7 +10,7 @@ class MeasureMeasbas extends Model
 {
     use HasFactory;
 
-    protected $table = 'measure_measbass';
+    protected $table = 'measure_measbases';
 
     protected $guarded = [];
 }
