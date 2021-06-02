@@ -17,10 +17,10 @@ class CreateMeasureMeasresTable extends Migration
             $table->id();
             $table->unsignedBigInteger('sensor_measure_id')->index();
             $table->string('name');
-            $table->integer('pkpot');
-            $table->integer('dltc');
-            $table->integer('bgc');
-            $table->integer('err');
+            $table->string('pkpot');
+            $table->string('dltc');
+            $table->string('bgc');
+            $table->string('err');
             $table->string('blpsx', 10);
             $table->string('blpsy', 10);
             $table->string('blpex', 10);

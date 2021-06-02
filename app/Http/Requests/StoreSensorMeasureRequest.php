@@ -72,10 +72,10 @@ class StoreSensorMeasureRequest extends FormRequest
 
         if (!empty($this->get('measres'))) {
             $rules['measres.*.name'] = 'required|string|max:50';
-            $rules['measres.*.pkpot'] = 'required|numeric';
-            $rules['measres.*.dltc'] = 'required|numeric';
-            $rules['measres.*.bgc'] = 'required|numeric';
-            $rules['measres.*.err'] = 'required|numeric';
+            $rules['measres.*.pkpot'] = 'required|string';
+            $rules['measres.*.dltc'] = 'required|string';
+            $rules['measres.*.bgc'] = 'required|string';
+            $rules['measres.*.err'] = 'required|string';
             $rules['measres.*.blpsx'] = 'required|string|max:10';
             $rules['measres.*.blpsy'] = 'required|string|max:10';
             $rules['measres.*.blpex'] = 'required|string|max:10';
