@@ -46,4 +46,4 @@ Route::middleware('api.token')->prefix('setting')->group(function () {
 
 });
 
-Route::middleware([])->get('/time-cloud', [\App\Http\Controllers\Controller::class, 'getLocalTime'])->name('local.time');
+Route::middleware(['api.token'])->get('/time-cloud', [\App\Http\Controllers\Controller::class, 'getLocalTime'])->name('local.time');
