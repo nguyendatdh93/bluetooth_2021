@@ -45,3 +45,5 @@ Route::middleware('api.token')->prefix('setting')->group(function () {
         ->name('sensor.settings.delete');
 
 });
+
+Route::middleware([])->get('/time-cloud', [\App\Http\Controllers\Controller::class, 'getLocalTime'])->name('local.time');
