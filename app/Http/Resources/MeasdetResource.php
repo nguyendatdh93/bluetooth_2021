@@ -20,7 +20,7 @@ class MeasdetResource extends JsonResource
             'deltae' => $this->deltae,
             'deltai' => $this->deltai,
             'eb' => $this->eb,
-            'ib' => $this->id,
+            'ib' => $this->ib,
             'ef' => $this->ef,
             'if' => $this->if,
             'created_at' => $this->created_at->format('Y-m-d H:m:i'),
