@@ -51,11 +51,13 @@ class SensorMeasuresController extends Controller
     {
         if ($measres = $request->get('measres')) {
             $sensorMeasure->measres()->delete();
-            foreach ($measres as $item) {
+            foreach ($measres as $index => $item) {
+                $level = $this->getMeasresLevel($item['dltc'], $index);
                 $sensorMeasure->measres()->create([
                     'name' => $item['name'],
                     'pkpot' => $item['pkpot'],
                     'dltc' => $item['dltc'],
+                    'level' => $level,
                     'bgc' => $item['bgc'],
                     'err' => $item['err'],
                     'blpsx' => $item['blpsx'],
@@ -65,6 +67,56 @@ class SensorMeasuresController extends Controller
                 ]);
             }
         }
+    }
+
+    private function getMeasresLevel($dltc, $index)
+    {
+        $level = '---';
+
+        if (!is_numeric($dltc)) {
+            return $level;
+        }
+
+        switch ($dltc) {
+            case $index == 0 && $dltc >= 0 && $dltc < 0.1 :
+                $level = 0;
+                break;
+            case $index == 0 && $dltc >= 0.1 && $dltc < 0.2 :
+                $level = 1;
+                break;
+            case $index == 0 && $dltc >= 0.2 && $dltc < 0.3 :
+                $level = 2;
+                break;
+            case $index == 0 && $dltc >= 0.3 && $dltc < 0.4 :
+                $level = 3;
+                break;
+            case $index == 0 && $dltc >= 0.4 && $dltc < 0.5 :
+                $level = 4;
+                break;
+            case $index == 0 && $dltc >= 0.5 :
+                $level = 5;
+                break;
+            case $index > 0 && $dltc >= 0 && $dltc < 1 :
+                $level = 0;
+                break;
+            case $index > 0 && $dltc >= 1 && $dltc < 2 :
+                $level = 1;
+                break;
+            case $index > 0 && $dltc >= 2 && $dltc < 3 :
+                $level = 2;
+                break;
+            case $index > 0 && $dltc >= 3 && $dltc < 4 :
+                $level = 3;
+                break;
+            case $index > 0 && $dltc >= 4 && $dltc < 5 :
+                $level = 4;
+                break;
+            case $index > 0 && $dltc >= 5 :
+                $level = 5;
+                break;
+        }
+
+        return $level;
     }
 
     private function storeMeasdet($request, $sensorMeasure)
