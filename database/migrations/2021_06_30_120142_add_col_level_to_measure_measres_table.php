@@ -15,6 +15,7 @@ class AddColLevelToMeasureMeasresTable extends Migration
     {
         Schema::table('measure_measres', function (Blueprint $table) {
             $table->string('level')->after('dltc');
+            $table->string('number_organism');
         });
     }
 
@@ -27,6 +28,7 @@ class AddColLevelToMeasureMeasresTable extends Migration
     {
         Schema::table('measure_measres', function (Blueprint $table) {
             $table->dropColumn('level');
+            $table->dropColumn('number_organism');
         });
     }
 }

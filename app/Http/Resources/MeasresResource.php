@@ -19,6 +19,8 @@ class MeasresResource extends JsonResource
             'name' => $this->name,
             'pkpot' => $this->pkpot,
             'dltc' => $this->dltc,
+            'level' => $this->level,
+            'number_organism' => $this->number_organism,
             'bgc' => $this->bgc,
             'err' => $this->err,
             'blpsx' => $this->blpsx,
