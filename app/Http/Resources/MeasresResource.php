@@ -21,6 +21,7 @@ class MeasresResource extends JsonResource
             'dltc' => $this->dltc,
             'level' => $this->level,
             'number_organism' => $this->number_organism,
+            'explain' => 'ピーク高さで定量',
             'bgc' => $this->bgc,
             'err' => $this->err,
             'blpsx' => $this->blpsx,
